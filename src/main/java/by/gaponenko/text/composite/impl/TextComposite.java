@@ -8,6 +8,8 @@ import java.util.List;
 
 public class TextComposite implements TextComponent {
     private static final String LEXEME_DELIMITER = " ";
+    private static final String SENTENCE_DELIMITER = " ";
+    private static final String PARAGRAPH_DELIMITER = "\n";
     private TextComponentType type;
     private List<TextComponent> components;
 
@@ -33,6 +35,11 @@ public class TextComposite implements TextComponent {
     }
 
     @Override
+    public List<TextComponent> getComponents() {
+        return components;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -54,10 +61,16 @@ public class TextComposite implements TextComponent {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (TextComponent component : components) {
-            stringBuilder.append(component.toString());
             if (TextComponentType.LEXEME.equals(component.getComponentType())) {
                 stringBuilder.append(LEXEME_DELIMITER);
             }
+            if (TextComponentType.SENTENCE.equals(component.getComponentType())) {
+                stringBuilder.append(SENTENCE_DELIMITER);
+            }
+            if (TextComponentType.PARAGRAPH.equals(component.getComponentType())) {
+                stringBuilder.append(PARAGRAPH_DELIMITER);
+            }
+            stringBuilder.append(component.toString().strip());
         }
         return stringBuilder.toString();
     }

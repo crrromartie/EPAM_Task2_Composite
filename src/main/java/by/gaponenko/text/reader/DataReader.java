@@ -5,29 +5,22 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class DataReader {
     static Logger logger = LogManager.getLogger();
 
-    public List<String> readData(String filePath) throws TextCompositeException {
-        List<String> lines;
-        try (FileReader fileReader = new FileReader(filePath);
-             BufferedReader bufferedReader = new BufferedReader(fileReader)) {
-            lines = bufferedReader.lines().collect(Collectors.toList());
-        } catch (FileNotFoundException e) {
-            logger.log(Level.ERROR, "File not found!", e);
-            throw new TextCompositeException("File not found: " + filePath, e);
+    public String readData(String filePath) throws TextCompositeException {
+        String text;
+        try {
+            text = Files.readString(Paths.get(filePath));
         } catch (IOException e) {
             logger.log(Level.ERROR, "File reading error!", e);
             throw new TextCompositeException("File reading error: " + filePath, e);
         }
         logger.log(Level.INFO, "File read successfully!");
-        return lines;
+        return text;
     }
 }

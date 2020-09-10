@@ -3,23 +3,33 @@ package by.gaponenko.text.parser.impl;
 import by.gaponenko.text.composite.TextComponent;
 import by.gaponenko.text.composite.TextComponentType;
 import by.gaponenko.text.composite.impl.TextComposite;
-import by.gaponenko.text.parser.Parser;
+import by.gaponenko.text.parser.PrimeParser;
 
-public class SentenceParser implements Parser {
-    private static final String SENTENCE_DELIMITER_REGEX = "[.?!]\\s? | [.{3}]\\s?";
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-    private Parser parser;
+public class SentenceParser implements PrimeParser {
+    private static final String SENTENCE_REGEX = "[^.!?\\s][^.!?]*(?:[.!?](?!['\\\"]?\\s|$)[^.!?]*)*[.!?]?['\\\"]?(?=\\s|$)";
+
+    private PrimeParser lexemeParser;
 
     public SentenceParser() {
-        parser = new LexemeParser();
+        lexemeParser = new LexemeParser();
     }
 
     @Override
     public TextComponent parse(String text) {
         TextComponent componentParagraph = new TextComposite(TextComponentType.PARAGRAPH);
-        String[] sentences = text.split(SENTENCE_DELIMITER_REGEX);
+        Pattern pattern = Pattern.compile(SENTENCE_REGEX);
+        Matcher matcher = pattern.matcher(text);
+        List<String> sentences = new ArrayList<>();
+        while (matcher.find()) {
+            sentences.add(matcher.group());
+        }
         for (String element : sentences) {
-            TextComponent componentLexeme = parser.parse(element);
+            TextComponent componentLexeme = lexemeParser.parse(element);
             componentParagraph.add(componentLexeme);
         }
         return componentParagraph;

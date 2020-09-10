@@ -5,24 +5,30 @@ import by.gaponenko.text.composite.TextComponent;
 import by.gaponenko.text.composite.TextComponentType;
 import by.gaponenko.text.composite.impl.SymbolLeaf;
 import by.gaponenko.text.composite.impl.TextComposite;
-import by.gaponenko.text.parser.Parser;
+import by.gaponenko.text.parser.PrimeParser;
 
-public class SymbolParser implements Parser {
+public class SymbolParser implements PrimeParser {
     private static final String SYMBOL_DELIMITER_REGEX = "";
-    private static final String PUNCTUATION_REGEX = "\\.{3}|[.,?!]";
+    private static final String PUNCTUATION_REGEX = "\\.{3}|[\\.,?!]";
+    private static final String NUMBER_REGEX = "\\d";
 
     @Override
     public TextComponent parse(String text) {
         TextComponent componentLexeme = new TextComposite(TextComponentType.LEXEME);
-        String[] symbols = text.split(SYMBOL_DELIMITER_REGEX);
+        String[] symbols = text.strip().split(SYMBOL_DELIMITER_REGEX);
         for (String element : symbols) {
-            TextComponent componentSymbol;
-            if (element.matches(PUNCTUATION_REGEX)) {
-                componentSymbol = new SymbolLeaf(SymbolType.PUNCTUATION, element);
-            } else {
-                componentSymbol = new SymbolLeaf(SymbolType.LETTER, element);
+            SymbolType symbolType;
+            if (!element.isBlank()) {
+                if (element.matches(PUNCTUATION_REGEX)) {
+                    symbolType = SymbolType.PUNCTUATION;
+                } else if (element.matches(NUMBER_REGEX)) {
+                    symbolType = SymbolType.NUMBER;
+                } else {
+                    symbolType = SymbolType.LETTER;
+                }
+                TextComponent component = new SymbolLeaf(symbolType, element.charAt(0));
+                componentLexeme.add(component);
             }
-            componentLexeme.add(componentSymbol);
         }
         return componentLexeme;
     }
