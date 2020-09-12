@@ -6,8 +6,7 @@ import by.gaponenko.text.composite.impl.TextComposite;
 import by.gaponenko.text.parser.PrimeParser;
 
 public class ParagraphParser implements PrimeParser {
-    private static final String PARAGRAPH_DELIMITER_REGEX = "\n";
-
+    private static final String PARAGRAPH_DELIMITER_REGEX = "(?m)(?=^\\s{4})";
     private PrimeParser sentenceParser;
 
     public ParagraphParser() {

@@ -7,9 +7,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class TextComposite implements TextComponent {
-    private static final String LEXEME_DELIMITER = " ";
+    private static final String PARAGRAPH_DELIMITER = "\n\t";
     private static final String SENTENCE_DELIMITER = " ";
-    private static final String PARAGRAPH_DELIMITER = "\n";
+    private static final String LEXEME_DELIMITER = " ";
     private TextComponentType type;
     private List<TextComponent> components;
 
@@ -60,17 +60,18 @@ public class TextComposite implements TextComponent {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("\t");
         for (TextComponent component : components) {
-            if (TextComponentType.LEXEME.equals(component.getComponentType())) {
-                stringBuilder.append(LEXEME_DELIMITER);
+            stringBuilder.append(component.toString().strip());
+            if (TextComponentType.PARAGRAPH.equals(component.getComponentType())) {
+                stringBuilder.append(PARAGRAPH_DELIMITER);
             }
             if (TextComponentType.SENTENCE.equals(component.getComponentType())) {
                 stringBuilder.append(SENTENCE_DELIMITER);
             }
-            if (TextComponentType.PARAGRAPH.equals(component.getComponentType())) {
-                stringBuilder.append(PARAGRAPH_DELIMITER);
+            if (TextComponentType.LEXEME.equals(component.getComponentType())) {
+                stringBuilder.append(LEXEME_DELIMITER);
             }
-            stringBuilder.append(component.toString().strip());
         }
         return stringBuilder.toString();
     }

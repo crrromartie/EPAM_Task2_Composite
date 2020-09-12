@@ -9,7 +9,7 @@ import by.gaponenko.text.parser.PrimeParser;
 
 public class SymbolParser implements PrimeParser {
     private static final String SYMBOL_DELIMITER_REGEX = "";
-    private static final String PUNCTUATION_REGEX = "\\.{3}|[\\.,?!]";
+    private static final String PUNCTUATION_REGEX = "[\\p{Punct}\\s]";
     private static final String NUMBER_REGEX = "\\d";
 
     @Override

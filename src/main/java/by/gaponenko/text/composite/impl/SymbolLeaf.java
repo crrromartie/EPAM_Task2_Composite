@@ -3,10 +3,14 @@ package by.gaponenko.text.composite.impl;
 import by.gaponenko.text.composite.SymbolType;
 import by.gaponenko.text.composite.TextComponent;
 import by.gaponenko.text.composite.TextComponentType;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 public class SymbolLeaf implements TextComponent {
+    static Logger logger = LogManager.getLogger();
     private SymbolType symbolType;
     private char value;
 
@@ -15,18 +19,25 @@ public class SymbolLeaf implements TextComponent {
         this.value = value;
     }
 
+    public SymbolLeaf(SymbolType symbol) {
+        this.symbolType = symbol;
+    }
+
     @Override
     public void add(TextComponent component) {
+        logger.log(Level.FATAL, "Method is not supported!");
         throw new UnsupportedOperationException("Method is not supported!");
     }
 
     @Override
     public void remove(TextComponent component) {
+        logger.log(Level.FATAL, "Method is not supported!");
         throw new UnsupportedOperationException("Method is not supported!");
     }
 
     @Override
     public TextComponent getChild(int index) {
+        logger.log(Level.FATAL, "Method is not supported!");
         throw new UnsupportedOperationException("Method is not supported!");
     }
 
@@ -37,7 +48,12 @@ public class SymbolLeaf implements TextComponent {
 
     @Override
     public List<TextComponent> getComponents() {
+        logger.log(Level.FATAL, "Method is not supported!");
         throw new UnsupportedOperationException("Method is not supported!");
+    }
+
+    public SymbolType getSymbolType() {
+        return symbolType;
     }
 
     @Override

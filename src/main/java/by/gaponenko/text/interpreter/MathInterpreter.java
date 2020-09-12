@@ -1,5 +1,6 @@
 package by.gaponenko.text.interpreter;
 
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,10 +21,10 @@ public class MathInterpreter {
         String calculatedMathExpression;
         try {
             calculatedMathExpression = scriptEngine.eval(mathExpression).toString();
-            logger.info("Successful calculate expression: " + mathExpression);
+            logger.log(Level.INFO, "Successful calculate expression: " + mathExpression);
         } catch (ScriptException e) {
             calculatedMathExpression = mathExpression;
-            logger.error("Failed calculate expression: " + mathExpression, e);
+            logger.log(Level.ERROR, "Failed calculate expression: " + mathExpression, e);
         }
         return calculatedMathExpression;
     }

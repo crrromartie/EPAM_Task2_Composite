@@ -9,7 +9,7 @@ import by.gaponenko.text.parser.PrimeParser;
 import java.util.regex.Pattern;
 
 public class LexemeParser implements PrimeParser {
-    private static final String LEXEME_DELIMITER_REGEX = "\\s";
+    private static final String LEXEME_DELIMITER_REGEX = "\\s+";
     private static final String REGEX_CALCULATION = "\\p{N}+";
     private PrimeParser symbolParser;
 

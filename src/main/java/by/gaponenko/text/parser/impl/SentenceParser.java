@@ -11,7 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SentenceParser implements PrimeParser {
-    private static final String SENTENCE_REGEX = "[^.!?\\s][^.!?]*(?:[.!?](?!['\\\"]?\\s|$)[^.!?]*)*[.!?]?['\\\"]?(?=\\s|$)";
+    private static final String SENTENCE_REGEX = "[^.!?\\s][^.!?]*(?:[.!?](?!['\"]?\\s|$)[^.!?]*)*[.!?]?['\"]?(?=\\s|$)";
 
     private PrimeParser lexemeParser;
 
