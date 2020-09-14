@@ -17,7 +17,7 @@ public class WordLengthComparator implements Comparator<TextComponent> {
         int sum = 0;
         List<TextComponent> lexemes = sentence.getComponents();
         for (TextComponent lexeme : lexemes) {
-            SymbolLeaf leaf = (SymbolLeaf) (lexeme.getChild(lexeme.toString().length() - 1));
+            SymbolLeaf leaf = (SymbolLeaf) (lexeme.getChild(lexeme.toString().strip().length() - 1));
             if (leaf.getSymbolType().equals(SymbolType.PUNCTUATION)) {
                 sum += (lexeme.toString().length() - 1);
             } else {
