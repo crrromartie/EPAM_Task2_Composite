@@ -15,9 +15,11 @@ public class MathInterpreter {
     private MathInterpreter() {
     }
 
-    public static String calculateExpression(String mathExpression) {
+    public static String calculateExpression(String mathExpression, int i, int j) {
         ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
         ScriptEngine scriptEngine = scriptEngineManager.getEngineByName(SCRIPT_ENGINE_NAME);
+        scriptEngine.put("i", i);
+        scriptEngine.put("j", j);
         String calculatedMathExpression;
         try {
             calculatedMathExpression = scriptEngine.eval(mathExpression).toString();
