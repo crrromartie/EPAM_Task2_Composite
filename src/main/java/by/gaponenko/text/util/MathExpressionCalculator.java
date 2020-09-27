@@ -1,4 +1,4 @@
-package by.gaponenko.text.interpreter;
+package by.gaponenko.text.util;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -8,11 +8,11 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
-public class MathInterpreter {
+public class MathExpressionCalculator {
     static Logger logger = LogManager.getLogger();
     private static final String SCRIPT_ENGINE_NAME = "JavaScript";
 
-    private MathInterpreter() {
+    private MathExpressionCalculator() {
     }
 
     public static String calculateExpression(String mathExpression) {

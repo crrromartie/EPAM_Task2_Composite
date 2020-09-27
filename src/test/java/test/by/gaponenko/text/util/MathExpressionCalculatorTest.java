@@ -1,20 +1,19 @@
-package test.by.gaponenko.text.interpreter;
+package test.by.gaponenko.text.util;
 
-import by.gaponenko.text.interpreter.MathInterpreter;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class MathInterpreterTest {
+public class MathExpressionCalculatorTest {
     @Test
     public void calculateExpressionPositiveTest() {
-        String actual = MathInterpreter.calculateExpression("3+2*6");
+        String actual = by.gaponenko.text.util.MathExpressionCalculator.calculateExpression("3+2*6");
         String expected = "15";
         Assert.assertEquals(actual, expected);
     }
 
     @Test
     public void calculateExpressionNegativeTest() {
-        String actual = MathInterpreter.calculateExpression("7*5+1");
+        String actual = by.gaponenko.text.util.MathExpressionCalculator.calculateExpression("7*5+1");
         String expected = "55.0";
         Assert.assertNotEquals(actual, expected);
     }
